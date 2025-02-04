@@ -143,9 +143,150 @@ DROP DATABASE mydatabase;
 ```
 
 ## Conclusion
-You have successfully installed and configured MySQL on Ubuntu. You can now start creating databases and managing your data.
 
-For more details, visit the [official MySQL documentation](https://dev.mysql.com/doc/). 🚀
 
+# 📌 MySQL Cheat Sheet
+
+A quick reference guide for MySQL commands and queries. 🚀
+
+## 📌 Basics
+```sql
+-- Login to MySQL
+mysql -u username -p
+
+-- Show databases
+SHOW DATABASES;
+
+-- Select a database
+USE database_name;
+
+-- Show tables in a database
+SHOW TABLES;
+
+-- Describe table structure
+DESCRIBE table_name;
+
+-- Create a new database
+CREATE DATABASE database_name;
+
+-- Drop a database
+DROP DATABASE database_name;
+```
+
+## 📌 Table Management
+```sql
+-- Create a table
+CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Drop a table
+DROP TABLE table_name;
+
+-- Rename a table
+RENAME TABLE old_table_name TO new_table_name;
+
+-- Truncate a table (delete all rows, keep structure)
+TRUNCATE TABLE table_name;
+```
+
+## 📌 Data Manipulation
+```sql
+-- Insert data
+INSERT INTO users (name, email) VALUES ('John Doe', 'john@example.com');
+
+-- Update data
+UPDATE users SET name = 'Jane Doe' WHERE id = 1;
+
+-- Delete data
+DELETE FROM users WHERE id = 1;
+```
+
+## 📌 Querying Data
+```sql
+-- Select all columns
+SELECT * FROM users;
+
+-- Select specific columns
+SELECT name, email FROM users;
+
+-- Filtering results
+SELECT * FROM users WHERE email = 'john@example.com';
+
+-- Sorting results
+SELECT * FROM users ORDER BY name ASC;
+
+-- Limit results
+SELECT * FROM users LIMIT 5;
+
+-- Count rows
+SELECT COUNT(*) FROM users;
+```
+
+## 📌 Joins
+```sql
+-- Inner Join
+SELECT users.name, orders.amount 
+FROM users 
+INNER JOIN orders ON users.id = orders.user_id;
+
+-- Left Join
+SELECT users.name, orders.amount 
+FROM users 
+LEFT JOIN orders ON users.id = orders.user_id;
+```
+
+## 📌 Indexes
+```sql
+-- Create an index
+CREATE INDEX idx_email ON users(email);
+
+-- Show indexes
+SHOW INDEXES FROM users;
+
+-- Drop an index
+DROP INDEX idx_email ON users;
+```
+
+## 📌 Transactions
+```sql
+-- Start a transaction
+START TRANSACTION;
+
+-- Rollback a transaction
+ROLLBACK;
+
+-- Commit a transaction
+COMMIT;
+```
+
+## 📌 Users & Permissions
+```sql
+-- Create a new user
+CREATE USER 'newuser'@'localhost' IDENTIFIED BY 'password';
+
+-- Grant privileges
+GRANT ALL PRIVILEGES ON database_name.* TO 'newuser'@'localhost';
+
+-- Show user privileges
+SHOW GRANTS FOR 'newuser'@'localhost';
+
+-- Remove user
+DROP USER 'newuser'@'localhost';
+```
+
+## 📌 Backup & Restore
+```sql
+-- Backup database
+mysqldump -u username -p database_name > backup.sql
+
+-- Restore database
+mysql -u username -p database_name < backup.sql
+```
+
+### 🚀 Happy Querying! 🎯
 
 
